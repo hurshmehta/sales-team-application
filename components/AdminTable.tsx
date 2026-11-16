@@ -38,16 +38,21 @@ function formatDate(value: string): string {
 export default function AdminTable({
   rows,
   filters,
+  onFiltersChange,
 }: {
   rows: ApplicationRow[];
   filters: Filters;
+  onFiltersChange: (filters: Filters) => void;
 }) {
   const [openId, setOpenId] = useState<string | null>(null);
 
+  const updateFilter = (key: keyof Filters, value: string) => {
+    onFiltersChange({ ...filters, [key]: value || undefined });
+  };
+
   return (
     <div>
-      <form
-        method="get"
+      <div
         className="mt-8 flex flex-wrap gap-3"
         aria-label="Filter applications"
       >
@@ -55,7 +60,8 @@ export default function AdminTable({
           Status
           <select
             name="status"
-            defaultValue={filters.status || ""}
+            value={filters.status || ""}
+            onChange={(e) => updateFilter("status", e.target.value)}
             className="mt-1 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900"
           >
             {STATUS_OPTIONS.map((value) => (
@@ -69,7 +75,8 @@ export default function AdminTable({
           Licensing
           <select
             name="licensing"
-            defaultValue={filters.licensing || ""}
+            value={filters.licensing || ""}
+            onChange={(e) => updateFilter("licensing", e.target.value)}
             className="mt-1 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900"
           >
             {LICENSING_OPTIONS.map((value) => (
@@ -83,7 +90,8 @@ export default function AdminTable({
           Availability
           <select
             name="availability"
-            defaultValue={filters.availability || ""}
+            value={filters.availability || ""}
+            onChange={(e) => updateFilter("availability", e.target.value)}
             className="mt-1 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900"
           >
             {AVAILABILITY_OPTIONS.map((value) => (
@@ -93,13 +101,7 @@ export default function AdminTable({
             ))}
           </select>
         </label>
-        <button
-          type="submit"
-          className="self-end rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-700"
-        >
-          Filter
-        </button>
-      </form>
+      </div>
 
       {rows.length === 0 ? (
         <p className="mt-10 rounded-2xl border border-neutral-200 bg-white p-8 text-center text-neutral-500">
@@ -115,6 +117,7 @@ export default function AdminTable({
                 <th className="px-5 py-3 font-medium">Email</th>
                 <th className="px-5 py-3 font-medium">Phone</th>
                 <th className="px-5 py-3 font-medium">Status</th>
+                <th className="px-5 py-3 font-medium">Last step</th>
                 <th className="px-5 py-3 font-medium">Licensing</th>
                 <th className="px-5 py-3 font-medium">Availability</th>
                 <th className="px-5 py-3 font-medium">Details</th>
@@ -146,6 +149,9 @@ export default function AdminTable({
                           {row.status}
                         </span>
                       </td>
+                      <td className="whitespace-nowrap px-5 py-3 text-neutral-600">
+                        {(row as ApplicationRow & { last_step?: string }).last_step || "-"}
+                      </td>
                       <td className="px-5 py-3 text-neutral-600">
                         {row.licensing || "-"}
                       </td>
@@ -165,7 +171,7 @@ export default function AdminTable({
                     </tr>
                     {isOpen && (
                       <tr key={`${row.id}-detail`} className="border-b border-neutral-100 bg-neutral-50">
-                        <td colSpan={8} className="px-5 py-4 text-sm text-neutral-700">
+                        <td colSpan={9} className="px-5 py-4 text-sm text-neutral-700">
                           <dl className="grid gap-2 sm:grid-cols-2">
                             <div>
                               <dt className="font-medium text-neutral-500">Eligibility (US citizen / authorized, 18+)</dt>
