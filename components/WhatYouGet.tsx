@@ -42,35 +42,56 @@ const ITEMS = [
 ];
 
 export default function WhatYouGet() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [selected, setSelected] = useState(0);
+  const item = ITEMS[selected];
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {ITEMS.map((item, idx) => {
-        const isOpen = open === idx;
-        return (
-          <button
-            key={item.title}
-            type="button"
-            onClick={() => setOpen(isOpen ? null : idx)}
-            aria-expanded={isOpen}
-            className="rounded-2xl border border-neutral-200 bg-white p-6 text-left transition hover:border-neutral-300 hover:shadow-sm"
-          >
-            <h3 className="font-display text-xl font-bold text-neutral-900">
-              {item.title}
-            </h3>
-            <p className="mt-2 text-neutral-600">{item.summary}</p>
-            {isOpen && (
-              <p className="mt-3 border-t border-neutral-100 pt-3 text-neutral-600">
-                {item.detail}
-              </p>
-            )}
-            <span className="mt-4 inline-block text-sm font-medium text-accent">
-              {isOpen ? "Show less" : "Learn more"}
-            </span>
-          </button>
-        );
-      })}
+    <div>
+      <div
+        role="tablist"
+        aria-label="What you get"
+        className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {ITEMS.map((entry, idx) => {
+          const isSelected = selected === idx;
+          return (
+            <button
+              key={entry.title}
+              type="button"
+              role="tab"
+              aria-selected={isSelected}
+              onClick={() => setSelected(idx)}
+              className={`rounded-2xl border p-5 text-left transition ${
+                isSelected
+                  ? "border-accent bg-accent-light shadow-sm"
+                  : "border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-sm"
+              }`}
+            >
+              <span className="font-display text-lg font-bold text-neutral-900">
+                {entry.title}
+              </span>
+              <span className="mt-1 block text-sm text-neutral-600">
+                {entry.summary}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8">
+        <h3 className="font-display text-2xl font-bold text-neutral-900">
+          {item.title}
+        </h3>
+        <p className="mt-3 text-lg leading-relaxed text-neutral-600">
+          {item.detail}
+        </p>
+        <a
+          href="#apply"
+          className="mt-5 inline-block text-sm font-semibold text-accent hover:underline"
+        >
+          See if you qualify
+        </a>
+      </div>
     </div>
   );
 }
