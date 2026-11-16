@@ -22,6 +22,16 @@ export function getSupabase(): SupabaseClient {
   return client;
 }
 
+export interface PageViewRow {
+  id?: string;
+  session_id: string;
+  created_at: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  referrer: string | null;
+}
+
 export type ApplicationStatus =
   | "in_progress"
   | "disqualified_eligibility"
