@@ -63,12 +63,27 @@ export default function ApplicationForm() {
     setSessionId(id);
 
     const params = new URLSearchParams(window.location.search);
-    setUtm({
+    const utm = {
       utmSource: params.get("utm_source") || undefined,
       utmMedium: params.get("utm_medium") || undefined,
       utmCampaign: params.get("utm_campaign") || undefined,
       referrer: params.get("ref") || undefined,
-    });
+    };
+    setUtm(utm);
+
+    // Record one link open. Fire-and-forget; failures never block the form.
+    fetch("/api/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sessionId: id,
+        utmSource: utm.utmSource,
+        utmMedium: utm.utmMedium,
+        utmCampaign: utm.utmCampaign,
+        referrer: utm.referrer,
+        userAgent: navigator.userAgent,
+      }),
+    }).catch(() => {});
 
     if (resumedRef.current) return;
     resumedRef.current = true;
