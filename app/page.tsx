@@ -96,14 +96,40 @@ export default function HomePage() {
               </li>
             ))}
           </ul>
+
+          <dl className="mx-auto mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-neutral-200 pt-8">
+            <div>
+              <dt className="sr-only">Work location</dt>
+              <dd className="font-display text-3xl font-bold text-neutral-900">
+                100%
+              </dd>
+              <dd className="mt-1 text-sm text-neutral-600">Remote</dd>
+            </div>
+            <div>
+              <dt className="sr-only">Mentorship</dt>
+              <dd className="font-display text-3xl font-bold text-neutral-900">
+                1:1
+              </dd>
+              <dd className="mt-1 text-sm text-neutral-600">
+                Weekly mentorship
+              </dd>
+            </div>
+            <div>
+              <dt className="sr-only">Pre-licensing course</dt>
+              <dd className="font-display text-3xl font-bold text-neutral-900">
+                $200
+              </dd>
+              <dd className="mt-1 text-sm text-neutral-600">Course covered</dd>
+            </div>
+          </dl>
         </section>
 
         {/* What you get */}
         <section className="mx-auto max-w-5xl px-5 py-16 sm:py-20">
           <SectionHeading
             eyebrow="What you get"
-            title="Everything you need to start."
-            intro="No guesswork. Here is what comes with joining the team."
+            title="Everything to start."
+            intro="Six things most new agents figure out alone. Pick one to see it."
           />
           <WhatYouGet />
         </section>
@@ -113,24 +139,32 @@ export default function HomePage() {
           <div className="mx-auto max-w-5xl px-5">
             <SectionHeading
               eyebrow="Earnings"
-              title="What could this look like?"
-              intro="Adjust the numbers to your own pace. This is a hypothetical illustration, not a promise."
+              title="Run your own numbers."
+              intro="You're paid commission on every policy you write."
             />
             <EarningsCalculator />
           </div>
         </section>
 
-        {/* Why insurance: the Breakdown table */}
+        {/* Quote */}
+        <section className="mx-auto max-w-3xl px-5 py-16 text-center sm:py-20">
+          <p className="font-display text-2xl font-bold leading-snug text-neutral-900 sm:text-3xl">
+            Every family needs life insurance. Most have never had someone sit
+            down and explain it.{" "}
+            <em>That&apos;s where you come in.</em> We&apos;ll license you,
+            train you and stand beside you while you build something
+            that&apos;s yours.
+          </p>
+        </section>
+
+        {/* Why insurance: the comparison table */}
         <section id="why-insurance" className="mx-auto max-w-5xl scroll-mt-24 px-5 py-16 sm:py-20">
           <SectionHeading
             eyebrow="Why insurance"
-            title="What is the ideal model for an online business?"
-            intro="We compared the most popular ways to make money online. Here is how they stack up."
+            title="Compare it to everything else online."
+            intro="Less money up front. Faster to your first paycheck. A credential that's yours for life."
           />
           <BreakdownTable />
-          <p className="mt-8 text-center font-display text-xl text-neutral-900 sm:text-2xl">
-            That is why I&apos;m building my team on the insurance model.
-          </p>
         </section>
 
         {/* The path */}
@@ -149,7 +183,7 @@ export default function HomePage() {
         <section id="faq" className="mx-auto max-w-3xl scroll-mt-24 px-5 py-16 sm:py-20">
           <SectionHeading
             eyebrow="Questions"
-            title="Questions, answered."
+            title="Straight answers."
           />
           <FaqSection />
         </section>
