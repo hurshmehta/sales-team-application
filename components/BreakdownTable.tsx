@@ -1,110 +1,104 @@
-// Comparison table copied faithfully from the live site's "Breakdown" table
-// (hurshmehta.com): 6 metrics, 4 models plus the Ideal Model row.
+// Comparison table mirroring the reference site's table:
+// 6 metrics, TikTok Shop / Trading / Selling AI / Dropshipping plus the
+// Best fit (life insurance) column, highlighted.
 
-const MODELS = ["TikTok Shop", "Selling AI", "Trading", "HTS", "Ideal Model"];
+const MODELS = ["TikTok Shop", "Trading", "Selling AI", "Dropshipping", "Life insurance"];
 
 const ROWS: { metric: string; values: string[] }[] = [
   {
-    metric: "Startup Cost",
-    values: ["$0–250", "$2–5k", "$5–10k", "$0–500", "$0–250"],
+    metric: "Startup cost",
+    values: ["$0–250", "$5–10k", "$2–5k", "$500–2k", "$200–400"],
   },
   {
-    metric: "Time To First $$",
-    values: ["2–5m", "2–4m", "Huge variability", "2–5m", "Fast (14–30 days)"],
+    metric: "First paycheck",
+    values: ["2–5 months", "Unpredictable", "2–4 months", "2–6 months", "Often month one"],
   },
   {
-    metric: "Proven / Copycat",
+    metric: "Learning curve",
     values: [
-      "Need course / high risk",
-      "Lots of skills to learn",
-      "Need course / high risk",
-      "Depends on offer",
-      "Recession-proof, plug & play",
+      "Content skills",
+      "Years",
+      "Sales and marketing",
+      "Ads and suppliers",
+      "Weeks, with scripts",
     ],
   },
   {
-    metric: "Skill Requirement",
-    values: [
-      "Content mastery",
-      "Marketing + sales",
-      "High",
-      "Mastery 1–2 yrs",
-      "Low (<1 week to learn)",
-    ],
+    metric: "Demand",
+    values: ["Trend-driven", "Market-driven", "Crowded", "Crowded", "Every family"],
   },
   {
-    metric: "Fulfillment",
-    values: ["Zero", "High", "N/A", "Zero", "Low (one-time)"],
+    metric: "Credential",
+    values: ["None", "None", "None", "None", "State license"],
   },
   {
-    metric: "Scalability",
-    values: [
-      "Low (time for money)",
-      "Medium (more ads = more cost)",
-      "High",
-      "Low (time for money)",
-      "High ($100M potential)",
-    ],
+    metric: "Room to grow",
+    values: ["Low", "Capital-limited", "Medium", "Medium", "Lead a team"],
   },
 ];
 
 export default function BreakdownTable() {
   return (
-    <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white">
-      <table className="w-full min-w-[720px] border-collapse text-left">
-        <thead>
-          <tr className="border-b border-neutral-200">
-            <th className="px-5 py-4 text-sm font-medium text-neutral-500">
-              Metric
-            </th>
-            {MODELS.map((model) => (
-              <th
-                key={model}
-                className={`px-5 py-4 text-sm font-semibold ${
-                  model === "Ideal Model"
-                    ? "bg-accent-light text-neutral-900"
-                    : "text-neutral-900"
-                }`}
-              >
-                {model === "Ideal Model" ? (
-                  <span>
-                    <span className="mr-1 text-accent">★</span> Ideal Model
-                    <span className="ml-2 rounded-full bg-accent px-2 py-0.5 text-xs font-semibold text-white">
-                      Best fit
-                    </span>
-                  </span>
-                ) : (
-                  model
-                )}
+    <div>
+      <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white">
+        <table className="w-full min-w-[720px] border-collapse text-left">
+          <thead>
+            <tr className="border-b border-neutral-200">
+              <th className="px-5 py-4 text-sm font-medium text-neutral-500">
+                Metric
               </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {ROWS.map((row) => (
-            <tr
-              key={row.metric}
-              className="border-b border-neutral-100 last:border-b-0"
-            >
-              <th className="px-5 py-4 text-sm font-semibold text-neutral-900">
-                {row.metric}
-              </th>
-              {row.values.map((value, idx) => (
-                <td
-                  key={idx}
-                  className={`px-5 py-4 text-sm ${
-                    idx === row.values.length - 1
-                      ? "bg-accent-light font-medium text-neutral-900"
-                      : "text-neutral-600"
+              {MODELS.map((model) => (
+                <th
+                  key={model}
+                  className={`px-5 py-4 text-sm font-semibold ${
+                    model === "Life insurance"
+                      ? "bg-accent-light text-neutral-900"
+                      : "text-neutral-900"
                   }`}
                 >
-                  {value}
-                </td>
+                  {model === "Life insurance" ? (
+                    <span>
+                      <span className="mr-1 text-accent">★</span> Best fit
+                      <span className="block text-sm font-semibold text-neutral-900">
+                        Life insurance
+                      </span>
+                    </span>
+                  ) : (
+                    model
+                  )}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {ROWS.map((row) => (
+              <tr
+                key={row.metric}
+                className="border-b border-neutral-100 last:border-b-0"
+              >
+                <th className="px-5 py-4 text-sm font-semibold text-neutral-900">
+                  {row.metric}
+                </th>
+                {row.values.map((value, idx) => (
+                  <td
+                    key={idx}
+                    className={`px-5 py-4 text-sm ${
+                      idx === row.values.length - 1
+                        ? "bg-accent-light font-medium text-neutral-900"
+                        : "text-neutral-600"
+                    }`}
+                  >
+                    {value}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="mt-3 text-right text-sm text-neutral-500">
+        Swipe to compare ›
+      </p>
     </div>
   );
 }
