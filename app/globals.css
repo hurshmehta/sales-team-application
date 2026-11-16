@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background-color: #fafaf8;
+  color: #171717;
+}
+
+/* One-question-per-screen transition */
+@keyframes fade-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-slide {
+  animation: fade-slide-in 0.35s ease-out both;
+}
+
+/* Calendly inline widget sizing */
+.calendly-inline-widget {
+  min-width: 320px;
+  height: 630px;
+}
+
+@media (max-width: 480px) {
+  .calendly-inline-widget {
+    height: 680px;
+  }
+}
