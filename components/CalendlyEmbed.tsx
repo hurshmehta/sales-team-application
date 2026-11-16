@@ -100,5 +100,24 @@ export default function CalendlyEmbed({ name, email, onScheduled }: CalendlyEmbe
     );
   }
 
-  return <div ref={containerRef} className="calendly-inline-widget w-full" />;
+  // NOTE: data-auto-load="false" is load-bearing. Calendly's widget.js
+  // auto-inits every .calendly-inline-widget element as soon as the script
+  // executes, and it builds the widget URL from the element's data-url
+  // attribute. Our container has no data-url (we pass the URL to
+  // initInlineWidget instead), so the auto-init throws
+  // "Calendly: Widget URL not set" during script evaluation, window.Calendly
+  // never gets defined, and our init below silently does nothing. Marking
+  // the element data-auto-load="false" makes the auto-init skip it, so the
+  // script finishes loading and our manual initInlineWidget call works.
+  return (
+    <div
+      ref={containerRef}
+      data-auto-load="false"
+      className="calendly-inline-widget w-full"
+    >
+      <p className="pt-8 text-center text-neutral-500">
+        Loading calendar...
+      </p>
+    </div>
+  );
 }
