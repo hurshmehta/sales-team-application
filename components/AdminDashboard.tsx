@@ -328,6 +328,12 @@ export default function AdminDashboard({
               onFiltersChange={setFilters}
             />
           </section>
+
+          <p className="mt-10 text-sm text-neutral-400">
+            Note: link opens are counted from Nov 16, 2026, when tracking
+            went live. Applications submitted before then don&apos;t have a
+            matching open.
+          </p>
         </>
       )}
     </div>
