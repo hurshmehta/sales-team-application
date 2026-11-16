@@ -20,10 +20,8 @@ export default function EarningsCalculator() {
     const policiesPerMonth = (safePolicies * 52) / 12;
     const earnedPerPolicy = safePremium * (safeRate / 100);
     const monthlyCommission = policiesPerMonth * earnedPerPolicy;
-    // Rough estimate: about 10 hours of work per policy each week
-    // (calls, follow-ups, applications).
-    const hoursPerWeek = safePolicies * 10;
-    return { policiesPerMonth, earnedPerPolicy, monthlyCommission, hoursPerWeek };
+    const yearlyCommission = monthlyCommission * 12;
+    return { policiesPerMonth, earnedPerPolicy, monthlyCommission, yearlyCommission };
   }, [policiesPerWeek, avgPremium, commissionRate]);
 
   return (
@@ -70,6 +68,10 @@ export default function EarningsCalculator() {
                 className="w-full rounded-xl border border-neutral-300 bg-white py-3 pl-9 pr-4 text-lg text-neutral-900 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-200"
               />
             </div>
+            <p className="mt-2 text-sm text-neutral-500">
+              What a client pays per year. Family term policies are often
+              $600–$2,000.
+            </p>
           </div>
           <div>
             <label
@@ -93,11 +95,11 @@ export default function EarningsCalculator() {
                 %
               </span>
             </div>
+            <p className="mt-2 text-sm text-neutral-500">
+              First-year commission as a share of premium. It rises with
+              production.
+            </p>
           </div>
-          <p className="text-sm text-neutral-500">
-            Hours a week assumes about 10 hours of work per policy (calls,
-            follow-ups, applications). Adjust the inputs to match your pace.
-          </p>
         </div>
 
         <div className="flex flex-col justify-center rounded-xl bg-neutral-50 p-6">
@@ -105,7 +107,10 @@ export default function EarningsCalculator() {
             Estimated monthly commission
           </p>
           <p className="mt-1 font-display text-4xl font-bold text-neutral-900 sm:text-5xl">
-            {money.format(result.monthlyCommission)}
+            {money.format(result.monthlyCommission)}/mo
+          </p>
+          <p className="mt-2 text-neutral-600">
+            About {money.format(result.yearlyCommission)} a year
           </p>
           <dl className="mt-6 space-y-3 border-t border-neutral-200 pt-6 text-neutral-700">
             <div className="flex items-baseline justify-between gap-4">
@@ -121,12 +126,16 @@ export default function EarningsCalculator() {
               </dd>
             </div>
             <div className="flex items-baseline justify-between gap-4">
-              <dt>Roughly hours a week</dt>
-              <dd className="font-semibold text-neutral-900">
-                {result.hoursPerWeek}
-              </dd>
+              <dt>Hours a week, roughly</dt>
+              <dd className="font-semibold text-neutral-900">10–15</dd>
             </div>
           </dl>
+          <a
+            href="#apply"
+            className="mt-8 inline-block rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-dark"
+          >
+            Start my application
+          </a>
         </div>
       </div>
 
