@@ -68,20 +68,14 @@ export default function HomePage() {
 
       <main id="top">
         {/* Hero with the form open immediately */}
-        <section className="mx-auto max-w-3xl px-5 pb-16 pt-14 text-center sm:pt-20">
+        <section className="mx-auto max-w-3xl px-5 pb-16 pt-8 text-center sm:pt-10">
           <p className="inline-block rounded-full border border-neutral-200 bg-white px-4 py-1.5 text-sm font-medium text-neutral-700">
             Now accepting applications
-          </p>
-          <h1 className="mt-6 font-display text-5xl font-bold leading-tight text-neutral-900 sm:text-6xl">
-            See if you qualify.
-          </h1>
-          <p className="mt-4 text-xl text-neutral-600">
-            A few quick questions. About two minutes.
           </p>
 
           <div
             id="apply"
-            className="mt-10 scroll-mt-24 rounded-2xl border border-neutral-200 bg-white p-6 text-left shadow-sm sm:p-8"
+            className="mt-6 scroll-mt-24 rounded-2xl border border-neutral-200 bg-white p-6 text-left shadow-sm sm:p-8"
           >
             <ApplicationForm />
           </div>
